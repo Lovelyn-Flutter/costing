@@ -350,16 +350,40 @@ document
 
         finalPayment,
       }
+   
+      document
+  .getElementById(
+    'loading-overlay'
+  )
+  .classList.add('active')
 
       const result =
         await submitQuotation(
           payload
         )
 
+        document
+  .getElementById(
+    'loading-overlay'
+  )
+  .classList.remove('active')
+
       if (result.quotation) {
         window.location.href =
           './success.html'
       }
+
+      else {
+  document
+    .getElementById(
+      'loading-overlay'
+    )
+    .classList.remove('active')
+
+  alert(
+    'Submission failed. Please try again.'
+  )
+}
     }
   )
 
