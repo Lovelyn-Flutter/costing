@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>
+      Review Project — ValidPoint Solutions
+    </title>
+
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./css/layout.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./css/components.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./css/responsive.css"
+    />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="background-glow"></div>
+
+    <div class="page-container">
+      <main class="main-content">
+        <section class="hero-section">
+          <div class="top-branding">
+            <img
+              src="./assets/logo.png"
+              alt="ValidPoint Solutions"
+              class="logo"
+            />
+
+            <div>
+              <h1 class="company-name">
+                ValidPoint Solutions
+              </h1>
+
+              <p class="portal-text">
+                Review Configuration
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-badges">
+              <div class="hero-badge">
+                Transparent Billing
+              </div>
+
+              <div class="hero-badge">
+                Monthly Breakdown
+              </div>
+
+              <div class="hero-badge">
+                Secure Submission
+              </div>
+            </div>
+
+            <h2 class="hero-title">
+              Review Your Configuration
+            </h2>
+
+            <p class="hero-description">
+              Review your selected setup,
+              infrastructure preferences,
+              recurring services, and payment
+              structure before submitting your
+              onboarding request.
+            </p>
+          </div>
+        </section>
+
+        <div class="content-layout">
+          <div class="sections-wrapper">
+            <section class="config-section">
+              <div class="section-header">
+                <div class="section-number">
+                  ✓
+                </div>
+
+                <div>
+                  <p class="section-label">
+                    Selected Configuration
+                  </p>
+
+                  <h3 class="section-title">
+                    Your Selected Setup
+                  </h3>
+
+                  <p class="section-description">
+                    Below is a summary of your
+                    selected infrastructure,
+                    communication, and
+                    maintenance preferences.
+                  </p>
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <div
+                class="review-summary"
+                id="review-summary"
+              ></div>
+            </section>
+
+            <section class="config-section">
+              <div class="section-header">
+                <div class="section-number">
+                  ₦
+                </div>
+
+                <div>
+                  <p class="section-label">
+                    Payment Structure
+                  </p>
+
+                  <h3 class="section-title">
+                    Billing & Timeline
+                  </h3>
+
+                  <p class="section-description">
+                    Review your initial setup
+                    payment and recurring
+                    monthly services.
+                  </p>
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <div class="payment-grid">
+                <div class="payment-card">
+                  <p class="payment-label">
+                    Initial Setup Payment
+                  </p>
+
+                  <h3
+                    class="payment-price"
+                    id="review-setup-total"
+                  ></h3>
+
+                  <p class="payment-note">
+                    Includes development,
+                    setup, and yearly domain
+                    registration.
+                  </p>
+                </div>
+
+                <div class="payment-card">
+                  <p class="payment-label">
+                    Monthly Recurring Services
+                  </p>
+
+                  <h3
+                    class="payment-price"
+                    id="review-monthly-total"
+                  ></h3>
+
+                  <p class="payment-note">
+                    Monthly recurring services
+                    begin after the first free
+                    month maintenance period.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-card">
+                <div class="timeline-row">
+                  <p>Estimated Timeline</p>
+
+                  <span>
+                    3 Weeks
+                  </span>
+                </div>
+
+                <div class="timeline-row">
+                  <p>Initial Payment</p>
+
+                  <span id="initial-payment">
+                  </span>
+                </div>
+
+                <div class="timeline-row">
+                  <p>Final Payment</p>
+
+                  <span id="final-payment">
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            <section class="config-section">
+              <div class="section-header">
+                <div class="section-number">
+                  4
+                </div>
+
+                <div>
+                  <p class="section-label">
+                    Client Information
+                  </p>
+
+                  <h3 class="section-title">
+                    Contact Details
+                  </h3>
+
+                  <p class="section-description">
+                    Provide your information
+                    so we can continue your
+                    onboarding process.
+                  </p>
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <form class="review-form">
+                <div class="form-grid">
+                  <div class="input-group">
+                    <label>
+                      Full Name
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+
+                  <div class="input-group">
+                    <label>
+                      Company Name
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="Enter company name"
+                    />
+                  </div>
+
+                  <div class="input-group">
+                    <label>
+                      Email Address
+                    </label>
+
+                    <input
+                      type="email"
+                      placeholder="Enter email address"
+                    />
+                  </div>
+
+                  <div class="input-group">
+                    <label>
+                      Phone Number
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="Enter phone number"
+                    />
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label>
+                    Additional Notes
+                  </label>
+
+                  <textarea
+                    rows="6"
+                    placeholder="Enter additional project requirements..."
+                  ></textarea>
+                </div>
+              </form>
+            </section>
+
+            <div class="button-wrapper">
+              <button
+                class="continue-button"
+                id="submit-review"
+              >
+                Submit Project Request
+                <span>→</span>
+              </button>
+
+              <p class="continue-note">
+                Your onboarding request will
+                be reviewed shortly
+              </p>
+            </div>
+          </div>
+
+          <aside class="estimate-sidebar">
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">
+                Final Estimate
+              </h3>
+
+              <div class="sidebar-rows">
+                <div class="sidebar-row">
+                  <p>Development Package</p>
+
+                  <span
+                    id="review-sidebar-development"
+                  ></span>
+                </div>
+
+                <div class="sidebar-row">
+                  <p>Domain</p>
+
+                  <span
+                    id="review-sidebar-domain"
+                  ></span>
+                </div>
+
+                <div class="sidebar-row">
+                  <p>Hosting</p>
+
+                  <span
+                    id="review-sidebar-hosting"
+                  ></span>
+                </div>
+
+                <div class="sidebar-row">
+                  <p>Maintenance</p>
+
+                  <span
+                    id="review-sidebar-maintenance"
+                  ></span>
+                </div>
+
+                <div class="sidebar-row">
+                  <p>Professional Email</p>
+
+                  <span
+                    id="review-sidebar-email"
+                  ></span>
+                </div>
+
+                <div class="sidebar-row">
+                  <p>Newsletter</p>
+
+                  <span
+                    id="review-sidebar-newsletter"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="sidebar-divider"></div>
+
+              <div class="total-wrapper">
+                <div>
+                  <p class="total-label">
+                    Initial Setup Cost
+                  </p>
+
+                  <h3
+                    class="total-price"
+                    id="review-sidebar-setup-total"
+                  ></h3>
+                </div>
+              </div>
+
+              <div class="monthly-wrapper">
+                <p class="monthly-label">
+                  Monthly Recurring Services
+                </p>
+
+                <h4
+                  class="monthly-price"
+                  id="review-sidebar-monthly-total"
+                ></h4>
+
+                <p class="monthly-note">
+                  Maintenance billing begins
+                  after the first free month.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <div
+      class="validation-modal"
+      id="validation-modal"
+    >
+      <div class="validation-box">
+        <div class="validation-icon">
+          !
+        </div>
+
+        <h3>
+          Missing Information
+        </h3>
+
+        <p>
+          Please complete all required
+          fields before submitting your
+          onboarding request.
+        </p>
+
+        <button id="close-validation">
+          Okay
+        </button>
+      </div>
+    </div>
+
+    <script src="./js/pricing.js"></script>
+
+    <script src="./js/submitReview.js"></script>
+
+    <script src="./js/review.js"></script>
+  </body>
+</html>
