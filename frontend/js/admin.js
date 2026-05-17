@@ -29,7 +29,7 @@ async function updateStatus(
 ) {
   try {
     await fetch(
-      `'/api/quotations'/${id}/status`,
+      `/api/quotations/${id}/status`,
       {
         method: 'PUT',
 
