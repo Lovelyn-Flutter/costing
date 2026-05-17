@@ -1,7 +1,8 @@
 async function submitQuotation(data) {
   try {
     const response = await fetch(
-     '/api/quotations',
+     'https://costing-backend-i91t.onrender.com/api/quotations'
+,
       {
         method: 'POST',
 

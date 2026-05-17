@@ -1,7 +1,8 @@
 async function fetchQuotations() {
   try {
     const response = await fetch(
-     '/api/quotations'
+     'https://costing-backend-i91t.onrender.com/api/quotations'
+
     )
 
     const quotations =
@@ -29,7 +30,7 @@ async function updateStatus(
 ) {
   try {
     await fetch(
-      `/api/quotations/${id}/status`,
+      `https://costing-backend-i91t.onrender.com/api/quotations/${id}/status`,
       {
         method: 'PUT',
 
