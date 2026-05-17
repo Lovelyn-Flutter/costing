@@ -1,7 +1,7 @@
 async function submitQuotation(data) {
   try {
     const response = await fetch(
-      'http://localhost:5000/api/quotations',
+     '/api/quotations',
       {
         method: 'POST',
 

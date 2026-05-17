@@ -1,7 +1,7 @@
 async function fetchQuotations() {
   try {
     const response = await fetch(
-      'http://localhost:5000/api/quotations'
+     '/api/quotations'
     )
 
     const quotations =
@@ -29,7 +29,7 @@ async function updateStatus(
 ) {
   try {
     await fetch(
-      `http://localhost:5000/api/quotations/${id}/status`,
+      `'/api/quotations'/${id}/status`,
       {
         method: 'PUT',
 
