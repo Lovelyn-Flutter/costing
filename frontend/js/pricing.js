@@ -70,7 +70,7 @@ const pricing = {
       description:
         'Better reliability and stronger uptime.',
 
-      monthlyPrice: 3000,
+      monthlyPrice: 12000,
 
       includedInPackage: false,
 
