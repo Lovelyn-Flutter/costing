@@ -14,12 +14,46 @@ function formatDrawerCurrency(amount) {
 }
 
 function calculateDrawerSetupTotal() {
-  return (
-    pricing.basePackage.setupCost +
+  let total =
+    pricing.basePackage.setupCost
+
+  const domain =
     pricing.domain[
       drawerSelections.domain
-    ].yearlyPrice
-  )
+    ]
+
+  const hosting =
+    pricing.hosting[
+      drawerSelections.hosting
+    ]
+
+  const email =
+    pricing.email[
+      drawerSelections.email
+    ]
+
+  const newsletter =
+    pricing.newsletter[
+      drawerSelections.newsletter
+    ]
+
+  if (domain.addToSetupCost) {
+    total += domain.yearlyPrice
+  }
+
+  if (hosting.addToSetupCost) {
+    total += hosting.monthlyPrice
+  }
+
+  if (email.addToSetupCost) {
+    total += email.monthlyPrice
+  }
+
+  if (newsletter.addToSetupCost) {
+    total += newsletter.monthlyPrice
+  }
+
+  return total
 }
 
 function calculateDrawerMonthlyTotal() {
@@ -44,82 +78,112 @@ function createMobileDrawer() {
     document.createElement('div')
 
   drawer.className =
-    'mobile-drawer'
+    'mobile-estimate-bar'
 
   drawer.innerHTML = `
-    <div class="mobile-drawer-header">
-      <div>
-        <p class="mobile-drawer-label">
-          Current Estimate
-        </p>
+    <div
+      class="mobile-bar-collapsed"
+      id="mobile-bar-toggle"
+    >
+      <div class="mobile-bar-pricing">
+        <div>
+          <p class="mobile-bar-label">
+            Setup
+          </p>
 
-        <h3
-          class="mobile-drawer-total"
-          id="mobile-setup-total"
-        ></h3>
+          <h3
+            class="mobile-bar-price"
+            id="mobile-setup-total"
+          ></h3>
+        </div>
+
+        <div>
+          <p class="mobile-bar-label">
+            Monthly
+          </p>
+
+          <h3
+            class="mobile-bar-price"
+            id="mobile-monthly-total"
+          ></h3>
+        </div>
       </div>
 
-      <button
-        class="mobile-drawer-toggle"
-        id="mobile-drawer-toggle"
-      >
+      <button class="mobile-expand-btn">
         ↑
       </button>
     </div>
 
     <div
-      class="mobile-drawer-content"
-      id="mobile-drawer-content"
+      class="mobile-bar-expanded"
+      id="mobile-bar-expanded"
     >
-      <div class="mobile-drawer-rows">
-        <div class="mobile-drawer-row">
-          <p>Monthly Services</p>
+      <div class="mobile-expanded-header">
+        <h3>
+          Current Estimate
+        </h3>
 
-          <span
-            id="mobile-monthly-total"
-          ></span>
-        </div>
-
-        <div class="mobile-drawer-row">
-          <p>Maintenance</p>
-
-          <span>
-            Free First Month
-          </span>
-        </div>
-
-        <div class="mobile-drawer-row">
-          <p>Timeline</p>
-
-          <span>
-            3 Weeks
-          </span>
-        </div>
-
-        <div class="mobile-drawer-row">
-          <p>Initial Payment</p>
-
-          <span>
-            70%
-          </span>
-        </div>
+        <button
+          id="mobile-close-btn"
+        >
+          ✕
+        </button>
       </div>
 
-      <p class="mobile-drawer-note">
-        Maintenance billing begins after the
-        first free month.
-      </p>
+      <div class="mobile-estimate-totals">
+  <div class="mobile-estimate-total-card">
+    <p>
+      Initial Setup
+    </p>
+
+    <h3
+      id="mobile-expanded-setup"
+    ></h3>
+  </div>
+
+  <div class="mobile-estimate-total-card">
+    <p>
+      Monthly Recurring
+    </p>
+
+    <h3
+      id="mobile-expanded-monthly"
+    ></h3>
+  </div>
+</div>
+
+<div
+  class="mobile-estimate-content"
+  id="mobile-estimate-content"
+></div>
+
+<div class="mobile-estimate-note">
+        Maintenance billing begins
+        after the first free month.
+      </div>
     </div>
   `
 
   document.body.appendChild(drawer)
 
-  updateMobileDrawer()
+  setupDrawerEvents()
 
-  setupMobileDrawerToggle()
+  updateMobileDrawer()
 }
 
 function updateMobileDrawer() {
+  const latestSelections =
+    JSON.parse(
+      localStorage.getItem(
+        'validpointSelections'
+      )
+    ) || defaultSelections
+
+  Object.assign(
+    drawerSelections,
+    latestSelections
+  )
+
   const setupTotal =
     calculateDrawerSetupTotal()
 
@@ -146,35 +210,178 @@ function updateMobileDrawer() {
       monthlyTotal
     )}/mo`
   }
+
+  const expandedSetup =
+  document.getElementById(
+    'mobile-expanded-setup'
+  )
+
+const expandedMonthly =
+  document.getElementById(
+    'mobile-expanded-monthly'
+  )
+
+if (expandedSetup) {
+  expandedSetup.textContent =
+    formatDrawerCurrency(setupTotal)
 }
 
-function setupMobileDrawerToggle() {
-  const toggle =
-    document.getElementById(
-      'mobile-drawer-toggle'
-    )
+if (expandedMonthly) {
+  expandedMonthly.textContent = `${formatDrawerCurrency(
+    monthlyTotal
+  )}/mo`
+}
 
   const content =
     document.getElementById(
-      'mobile-drawer-content'
+      'mobile-estimate-content'
     )
 
-  let isOpen = false
+  if (content) {
+    const domain =
+      pricing.domain[
+        drawerSelections.domain
+      ]
 
-  toggle.addEventListener('click', () => {
-    isOpen = !isOpen
+    const hosting =
+      pricing.hosting[
+        drawerSelections.hosting
+      ]
 
-    if (isOpen) {
-      content.style.maxHeight =
-        content.scrollHeight + 'px'
+    const maintenance =
+      pricing.maintenance[
+        drawerSelections.maintenance
+      ]
 
-      toggle.textContent = '↓'
-    } else {
-      content.style.maxHeight = '0px'
+    const email =
+      pricing.email[
+        drawerSelections.email
+      ]
 
-      toggle.textContent = '↑'
+    const newsletter =
+      pricing.newsletter[
+        drawerSelections.newsletter
+      ]
+
+    content.innerHTML = `
+      <div class="mobile-estimate-row">
+        <p>Development</p>
+
+        <span>
+          ${formatDrawerCurrency(
+            pricing.basePackage.setupCost
+          )}
+        </span>
+      </div>
+
+      <div class="mobile-estimate-row">
+        <p>Domain</p>
+
+        <span>
+          ${
+            domain.includedInPackage
+              ? 'Included'
+              : `${formatDrawerCurrency(
+                  domain.yearlyPrice
+                )}/yr`
+          }
+        </span>
+      </div>
+
+      <div class="mobile-estimate-row">
+        <p>Hosting</p>
+
+        <span>
+          ${
+            hosting.includedInPackage
+              ? 'Included'
+              : `${formatDrawerCurrency(
+                  hosting.monthlyPrice
+                )}/mo`
+          }
+        </span>
+      </div>
+
+      <div class="mobile-estimate-row">
+        <p>Maintenance</p>
+
+        <span>
+          ${
+            maintenance.monthlyPrice ===
+            0
+              ? '₦0'
+              : `${formatDrawerCurrency(
+                  maintenance.monthlyPrice
+                )}/mo`
+          }
+        </span>
+      </div>
+
+      <div class="mobile-estimate-row">
+        <p>Email</p>
+
+        <span>
+          ${
+            email.monthlyPrice === 0
+              ? '₦0'
+              : `${formatDrawerCurrency(
+                  email.monthlyPrice
+                )}/mo`
+          }
+        </span>
+      </div>
+
+      <div class="mobile-estimate-row">
+        <p>Newsletter</p>
+
+        <span>
+          ${
+            newsletter.monthlyPrice ===
+            0
+              ? '₦0'
+              : `${formatDrawerCurrency(
+                  newsletter.monthlyPrice
+                )}/mo`
+          }
+        </span>
+      </div>
+    `
+  }
+}
+
+function setupDrawerEvents() {
+  const toggle =
+    document.getElementById(
+      'mobile-bar-toggle'
+    )
+
+  const expanded =
+    document.getElementById(
+      'mobile-bar-expanded'
+    )
+
+  const closeBtn =
+    document.getElementById(
+      'mobile-close-btn'
+    )
+
+  toggle.addEventListener(
+    'click',
+    () => {
+      expanded.classList.add(
+        'active'
+      )
     }
-  })
+  )
+
+  closeBtn.addEventListener(
+    'click',
+    () => {
+      expanded.classList.remove(
+        'active'
+      )
+    }
+  )
 }
 
 createMobileDrawer()
